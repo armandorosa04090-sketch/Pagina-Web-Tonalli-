@@ -1,0 +1,604 @@
+﻿:root {
+    color-scheme: dark;
+    --bg: #08080b;
+    --surface: rgba(255, 255, 255, 0.08);
+    --surface-strong: rgba(255, 255, 255, 0.12);
+    --text: #f7f4ee;
+    --text-muted: #c5c0b8;
+    --accent: #ffd166;
+    --accent-dark: #f4a261;
+    --border: rgba(255, 255, 255, 0.12);
+    --shadow: 0 24px 80px rgba(0, 0, 0, 0.26);
+    --radius: 28px;
+}
+
+/* --- Carousel / horizontal cards overrides --- */
+.cards{
+    display:flex !important;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    align-items: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.cards > .card{
+    scroll-snap-align: start;
+    flex: 0 0 33.333%; /* default show 3 per row on wide screens */
+    max-width: 560px;
+}
+
+/* Desktop: allow 3 columns fitting the container */
+@media (min-width: 1200px){
+    .cards > .card{ flex: 1 1 0; max-width: none; }
+}
+
+/* Medium: 2 cards per view */
+@media (max-width: 1100px){
+    .cards > .card{ flex: 0 0 48%; }
+}
+
+/* Small: 1 card per view (swipe) */
+@media (max-width: 860px){
+    .cards > .card{ flex: 0 0 100%; }
+    .cards{ gap: 1rem; padding-bottom: 1rem; }
+}
+
+/* Buttons always visible and positioned */
+.cards-btn{ display:flex !important; }
+
+/* hide scrollbar visually but keep scrolling functional */
+.cards::-webkit-scrollbar{ height:8px; }
+.cards::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.06); border-radius: 999px; }
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Evita que elementos interiores provoquen scroll horizontal */
+html, body {
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: radial-gradient(circle at top, rgba(255, 209, 102, 0.08), transparent 28%),
+        linear-gradient(180deg, #060709 0%, #0f1417 100%);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding: 22px clamp(1rem, 3vw, 8rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(6, 7, 11, 0.86);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 10px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.logo h2 {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.18em;
+    font-size: 1.7rem;
+    color: var(--accent);
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    list-style: none;
+}
+
+nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.95rem 1.2rem;
+    border-radius: 999px;
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+nav a:hover,
+nav a:focus {
+    color: var(--text);
+    background: rgba(255, 209, 102, 0.12);
+    transform: translateY(-1px);
+}
+
+.hero {
+    min-height: 100svh;
+    padding: 3.5rem clamp(1rem, 4vw, 8rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: url('imagenes/Inicio.png') center/cover no-repeat;
+    background-color: #0b1119;
+    background-blend-mode: normal;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(10, 14, 20, 0) 0%, rgba(10, 14, 20, 0.35) 48%, rgba(10, 14, 20, 0.80) 100%);
+    pointer-events: none;
+}
+
+.contenido {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 820px);
+    padding: clamp(2rem, 4vw, 3.25rem);
+    border-radius: 30px;
+    background: rgba(12, 19, 29, 0.30);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(8px);
+    text-align: center;
+}
+
+.hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.8rem, 6vw, 4.4rem);
+    line-height: 1.02;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.02em;
+}
+
+.hero p {
+    max-width: 42rem;
+    margin: 0 auto 2rem;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.85;
+    color: rgba(247, 244, 238, 0.85);
+}
+
+.boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #111;
+    padding: 1rem 2.4rem;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    transition: transform 0.2s ease, background 0.2s ease;
+    box-shadow: 0 20px 40px rgba(255, 209, 102, 0.18);
+}
+
+.boton:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+section {
+    padding: 6rem clamp(1rem, 4vw, 8rem);
+}
+
+/* Evita overflow accidental dentro de secciones */
+section {
+    overflow-x: hidden;
+}
+
+section:nth-of-type(even) {
+    background: rgba(255, 255, 255, 0.015);
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: clamp(2rem, 3vw, 3rem);
+    letter-spacing: 0.08em;
+    color: #f5f3ee;
+}
+
+.nosotros p,
+.contacto p,
+.ubicacion p {
+    max-width: 780px;
+    margin: 0 auto;
+    line-height: 1.9;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+.cards {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr 1.2fr 1.25fr; /* centro y tercera columna más anchas */
+    align-items: start;
+    max-width: 1600px; /* ampliar contenedor para que las columnas quepan */
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Contenedor de cards con botones (carousel en pantallas pequeñas) */
+.cards-container{
+    position: relative;
+}
+
+.cards-btn{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(255,255,255,0.06);
+    color: var(--accent);
+    font-size: 1.4rem;
+    display: none; /* visibles solo en móvil */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    z-index: 2000 !important;
+}
+
+.cards-btn--prev{
+    left: 16px;
+}
+.cards-btn--next{
+    right: 16px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2.4rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+    overflow: hidden;
+    min-width: 0; /* permite que el grid reduzca la tarjeta sin forzar overflow */
+}
+
+/* botones para desplazar la lista dentro de cada card */
+.card { position: relative; }
+.card-scroll{
+    position: absolute;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255,255,255,0.04);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+.card-scroll--up{ top: 12px; }
+.card-scroll--down{ bottom: 12px; }
+
+/* menu-items scroll container: allow vertical scroll but hide scrollbar */
+.menu-items{
+    max-height: 520px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+.menu-items::-webkit-scrollbar{ width:8px; }
+.menu-items::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.04); border-radius:999px; }
+
+.card h3 {
+    margin-bottom: 1.5rem;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    line-height: 1.05;
+    text-align: center;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+/* Evitar que títulos largos se partan; si no caben, la tercera columna es más ancha */
+.card h3 {
+    white-space: nowrap;
+}
+
+@media (max-width: 1120px) {
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 1100px;
+    }
+    .card h3 {
+        white-space: normal; /* permitir wrap en pantallas pequeñas */
+    }
+}
+
+.menu-items {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.menu-item {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 1.6rem 1.35rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+/* Permitir que columnas internas se encojan sin forzar overflow */
+.menu-item,
+.menu-text {
+    min-width: 0;
+}
+
+.menu-text span {
+    word-break: break-word;
+}
+
+.menu-item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 209, 102, 0.24);
+}
+
+.menu-item img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.2);
+}
+
+.menu-text strong {
+    display: block;
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+
+.menu-text span {
+    display: block;
+    font-size: 0.95rem;
+    color: rgba(247, 244, 238, 0.78);
+}
+
+.price {
+    margin-top: 0.75rem;
+    color: var(--accent);
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem;
+}
+
+.imagenes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.3rem;
+}
+
+.imagenes img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+    transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.imagenes img:hover {
+    transform: translateY(-6px) scale(1.02);
+    filter: saturate(1.1);
+}
+
+.ubicacion {
+    text-align: center;
+}
+
+.ubicacion-imagen {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.ubicacion-imagen img {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 28px;
+    box-shadow: 0 32px 90px rgba(0, 0, 0, 0.28);
+}
+
+.contacto {
+    text-align: center;
+}
+
+.contacto p {
+    margin-top: 1.1rem;
+}
+
+footer {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.72);
+    text-align: center;
+    padding: 2rem clamp(1rem, 3vw, 8rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 1120px) {
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .imagenes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 860px) {
+    header {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1.4rem 1.25rem;
+    }
+
+    nav ul {
+        justify-content: center;
+    }
+
+    .hero {
+        padding: 3rem 1.25rem 2.5rem;
+    }
+
+    .cards,
+    .imagenes {
+        grid-template-columns: 1fr;
+    }
+
+    /* Habilitar carousel en pantallas pequeñas */
+    .cards {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 1rem;
+    }
+
+    .cards > .card {
+        min-width: calc(100% - 2rem);
+        scroll-snap-align: start;
+    }
+
+    .cards-btn{ display: flex; }
+
+    .menu-item {
+        grid-template-columns: 80px 1fr;
+    }
+
+    .cards > .card:last-child h3 {
+        white-space: nowrap;
+    }
+
+    @media (max-width: 1120px) {
+        .cards {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            max-width: 1100px;
+        }
+        .card h3 {
+            white-space: normal; /* permitir wrap en pantallas pequeñas */
+        }
+    }
+    }
+
+    .hero h1 {
+        font-size: 2.4rem;
+    }
+
+    .menu-item {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .menu-item img {
+        width: 100%;
+        height: 220px;
+    }
+
+    .boton {
+        width: 100%;
+        padding: 1rem 1.2rem;
+    }
+/* Ajustes específicos para móviles pequeños: filas compactas con thumbnail a la izquierda */
+@media (max-width: 480px) {
+    .cards {
+        gap: 1.25rem;
+        padding: 0 0.75rem;
+    }
+
+    .card {
+        padding: 1rem;
+        border-radius: 18px;
+    }
+
+    .card h3 {
+        font-size: 1.4rem;
+        text-align: left;
+        margin-left: 0.25rem;
+    }
+
+    /* Mostrar cada menú como fila compacta: imagen pequeña + texto */
+    .menu-item {
+        grid-template-columns: 72px 1fr !important;
+        gap: 0.75rem;
+        padding: 0.9rem;
+        align-items: center;
+    }
+
+    .menu-item img {
+        width: 72px !important;
+        height: 72px !important;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    .menu-text strong {
+        font-size: 0.95rem;
+    }
+
+    .menu-text span {
+        font-size: 0.92rem;
+    }
+
+    .price {
+        font-size: 1rem;
+    }
+}
+}
