@@ -148,18 +148,18 @@ html, body {
     overflow-x: hidden;
 }
 
-html {
-    scroll-behavior: smooth;
+.hero {
+    min-height: calc(100vh - 60px);
+    padding: 1.5rem clamp(1rem, 4vw, 5rem) 1.25rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: url('imagenes/Inicio.png') top center / 140% no-repeat;
+    background-color: #0b1119;
+    background-blend-mode: normal;
 }
-
-body {
-    font-family: 'Montserrat', sans-serif;
-    background: radial-gradient(circle at top, rgba(255, 209, 102, 0.08), transparent 28%),
-        linear-gradient(180deg, #060709 0%, #0f1417 100%);
-    color: var(--text);
-    min-height: 100vh;
-}
-
 img {
     display: block;
     max-width: 100%;
@@ -187,7 +187,7 @@ header {
 }
 
 .header-spacer {
-    height: 70px;
+    height: 80px;
 }
 
 @media (max-width: 860px) {
@@ -267,14 +267,14 @@ nav a:focus {
 }
 
 .hero {
-    min-height: 100svh;
-    padding: 3.5rem clamp(1rem, 4vw, 8rem);
+    min-height: 75svh;
+    padding: 1.5rem clamp(1rem, 4vw, 5rem) 1.25rem;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     position: relative;
     overflow: hidden;
-    background: url('imagenes/Inicio.png') center/cover no-repeat;
+    background: url('imagenes/Inicio.png') top center / cover no-repeat;
     background-color: #0b1119;
     background-blend-mode: normal;
 }
@@ -290,21 +290,21 @@ nav a:focus {
 .contenido {
     position: relative;
     z-index: 1;
-    width: min(100%, 820px);
-    padding: clamp(2rem, 4vw, 3.25rem);
-    border-radius: 30px;
+    width: min(100%, 620px);
+    padding: clamp(1rem, 2.5vw, 1.8rem);
+    border-radius: 22px;
     background: rgba(12, 19, 29, 0.30);
     border: 1px solid rgba(255, 255, 255, 0.10);
-    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
     backdrop-filter: blur(8px);
     text-align: center;
 }
 
 .hero h1 {
     font-family: 'Cinzel', serif;
-    font-size: clamp(2.8rem, 6vw, 4.4rem);
-    line-height: 1.02;
-    margin-bottom: 1.2rem;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    line-height: 1.05;
+    margin-bottom: 1rem;
     letter-spacing: 0.02em;
 }
 
@@ -313,8 +313,16 @@ nav a:focus {
     margin: 0 auto 2rem;
     font-size: clamp(1rem, 1.4vw, 1.25rem);
     line-height: 1.85;
-    color: rgba(247, 244, 238, 0.85);
+    color: rgba(247, 244, 238, 0.95);
 }
+
+    .hero {
+        min-height: calc(100vh - 120px);
+        padding: 2.5rem 1rem 1.2rem;
+        align-items: flex-end;
+        background-position: top center;
+        background-size: cover;
+    }
 
 .boton {
     display: inline-flex;
@@ -774,8 +782,9 @@ footer {
     }
 
     .hero {
-        min-height: calc(100svh - 64px);
-        padding: 2rem 1rem 1.5rem;
+        min-height: calc(90svh - 64px);
+        padding: 2.5rem 1rem 1.2rem;
+        align-items: flex-end;
     }
 
     .hero h1 {
@@ -832,8 +841,9 @@ footer {
 /* Ajustes específicos para móviles pequeños: filas compactas con thumbnail a la izquierda */
 @media (max-width: 480px) {
     .hero {
-        min-height: calc(72svh - 64px);
-        padding: 1.4rem 0.75rem 0.8rem;
+        min-height: calc(92svh - 64px);
+        padding: 2.2rem 0.75rem 1rem;
+        align-items: flex-end;
     }
 
     .hero h1 {
@@ -841,13 +851,13 @@ footer {
         margin-bottom: 0.75rem;
     }
 
-    .hero p {
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
+    .hero {
+        min-height: calc(100vh - 120px);
+        padding: 2.2rem 0.75rem 1rem;
+        align-items: flex-end;
+        background-position: top center;
+        background-size: cover;
     }
-
-    .contenido {
-        width: 100%;
         padding: 1rem 0.9rem;
         border-radius: 22px;
         margin-top: 1rem;
