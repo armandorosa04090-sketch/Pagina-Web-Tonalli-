@@ -1,6 +1,7 @@
 ﻿:root {
     color-scheme: dark;
     --bg: #08080b;
+    --header-height: 60px;
     --surface: rgba(255, 255, 255, 0.08);
     --surface-strong: rgba(255, 255, 255, 0.12);
     --text: #f7f4ee;
@@ -10,6 +11,11 @@
     --border: rgba(255, 255, 255, 0.12);
     --shadow: 0 24px 80px rgba(0, 0, 0, 0.26);
     --radius: 28px;
+}
+
+/* Ensure anchor targets account for fixed header */
+[id] {
+    scroll-margin-top: calc(var(--header-height) + 12px);
 }
 
 /* --- Integrated editorial menu --- */
@@ -217,6 +223,10 @@ header {
     .hero h1 {
         font-size: 2.2rem;
     }
+
+    :root {
+        --header-height: 120px;
+    }
 }
 
 
@@ -381,7 +391,7 @@ section h2 {
 }
 
 .editorial-section {
-    margin-top: 48vh;
+    margin-top: 6rem;
     padding: 3rem clamp(1rem, 4vw, 2rem) 4rem;
     overflow: hidden;
 }
@@ -509,7 +519,7 @@ section h2 {
 
 @media (min-width: 900px) {
     .editorial-section {
-        margin-top: 38vh;
+        margin-top: 5rem;
     }
 
     .editorial-card {
@@ -519,7 +529,7 @@ section h2 {
 
 @media (max-width: 700px) {
     .editorial-section {
-        margin-top: 24vh;
+        margin-top: 2.5rem;
     }
 }
 
