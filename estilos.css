@@ -26,6 +26,17 @@
     border-radius: 24px;
     padding: 1.4rem;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.menu-editorial__link:hover,
+.menu-editorial__link:focus {
+    transform: translateY(-4px);
+    border-color: rgba(255, 209, 102, 0.4);
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.24);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .menu-editorial__header {
@@ -76,6 +87,48 @@
 .price {
     color: var(--accent);
     font-weight: 700;
+}
+
+.category-page {
+    padding: 3rem clamp(1rem, 4vw, 8rem) 5rem;
+}
+
+.category-hero {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+}
+
+.category-hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 0.8rem;
+    color: var(--accent);
+}
+
+.category-hero p {
+    max-width: 640px;
+    margin: 0 auto 1.2rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+.category-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.category-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+@media (max-width: 980px) {
+    .category-list {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 980px) {
@@ -328,6 +381,16 @@ section h2 {
     overflow: hidden;
     scroll-snap-align: start;
     box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.editorial-card:hover,
+.editorial-card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.3);
 }
 
 .editorial-card::before {
