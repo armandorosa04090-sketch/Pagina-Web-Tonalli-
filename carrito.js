@@ -167,8 +167,20 @@
             'Gracias.'
         ].join('\n');
 
-        const url = 'https://wa.me/' + PHONE_NUMBER + '?text=' + encodeURIComponent(message);
-        window.open(url, '_blank');
+        const encodedText = encodeURIComponent(message);
+        const appUrl = 'whatsapp://send?phone=' + PHONE_NUMBER + '&text=' + encodedText;
+        const webUrl = 'https://wa.me/' + PHONE_NUMBER + '?text=' + encodedText;
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+        if (isMobile) {
+            window.location.href = appUrl;
+            setTimeout(function () {
+                window.location.href = webUrl;
+            }, 1200);
+            return;
+        }
+
+        window.location.href = webUrl;
     }
 
     function bindProductButtons() {
