@@ -523,7 +523,7 @@ nav a:focus {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    background: url('imagenes/Inicio.png') top center / cover no-repeat;
+    background: url('imagenes/Inicio2.png') top center / cover no-repeat;
     background-color: #0b1119;
     background-blend-mode: normal;
 }
