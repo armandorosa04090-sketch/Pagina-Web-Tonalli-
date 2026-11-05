@@ -172,6 +172,9 @@
         const webUrl = 'https://wa.me/' + PHONE_NUMBER + '?text=' + encodedText;
         const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
+        saveCart([]);
+        renderCart();
+
         if (isMobile) {
             window.location.href = appUrl;
             return;
