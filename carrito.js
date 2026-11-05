@@ -129,7 +129,90 @@
         if (overlay) overlay.classList.remove('is-visible');
     }
 
-    function sendOrder() {
+    function askForTable() {
+        return new Promise(function (resolve) {
+            const existingModal = document.getElementById('table-selector-modal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            const overlay = document.createElement('div');
+            overlay.id = 'table-selector-modal';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.background = 'rgba(0, 0, 0, 0.7)';
+            overlay.style.display = 'flex';
+            overlay.style.alignItems = 'center';
+            overlay.style.justifyContent = 'center';
+            overlay.style.zIndex = '9999';
+
+            const modal = document.createElement('div');
+            modal.style.width = 'min(90vw, 360px)';
+            modal.style.background = '#1d1a1a';
+            modal.style.border = '1px solid #d4af37';
+            modal.style.borderRadius = '18px';
+            modal.style.padding = '22px 20px';
+            modal.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.35)';
+            modal.style.textAlign = 'center';
+
+            const title = document.createElement('p');
+            title.textContent = 'Selecciona tu mesa';
+            title.style.margin = '0 0 18px';
+            title.style.color = '#f5f1e7';
+            title.style.fontSize = '1.1rem';
+            title.style.fontWeight = '700';
+
+            const buttonsWrap = document.createElement('div');
+            buttonsWrap.style.display = 'flex';
+            buttonsWrap.style.gap = '12px';
+            buttonsWrap.style.justifyContent = 'center';
+
+            ['1', '2'].forEach(function (tableNumber) {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.textContent = 'Mesa ' + tableNumber;
+                button.style.flex = '1';
+                button.style.padding = '12px 10px';
+                button.style.border = '1px solid #d4af37';
+                button.style.borderRadius = '10px';
+                button.style.background = '#d4af37';
+                button.style.color = '#1b1b1b';
+                button.style.fontWeight = '700';
+                button.style.cursor = 'pointer';
+                button.addEventListener('click', function () {
+                    overlay.remove();
+                    resolve(tableNumber);
+                });
+                buttonsWrap.appendChild(button);
+            });
+
+            const cancelButton = document.createElement('button');
+            cancelButton.type = 'button';
+            cancelButton.textContent = 'Cancelar';
+            cancelButton.style.marginTop = '16px';
+            cancelButton.style.background = 'transparent';
+            cancelButton.style.border = '1px solid #f5f1e7';
+            cancelButton.style.color = '#f5f1e7';
+            cancelButton.style.padding = '10px 16px';
+            cancelButton.style.borderRadius = '10px';
+            cancelButton.style.cursor = 'pointer';
+            cancelButton.addEventListener('click', function () {
+                overlay.remove();
+                resolve(null);
+            });
+
+            modal.appendChild(title);
+            modal.appendChild(buttonsWrap);
+            modal.appendChild(cancelButton);
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+        });
+    }
+
+    async function sendOrder() {
         const cart = getCart();
 
         if (!cart.length) {
@@ -148,6 +231,17 @@
             return;
         }
 
+        const selectedTable = await askForTable();
+        if (selectedTable === null) {
+            return;
+        }
+
+        const sanitizedTable = String(selectedTable).trim();
+        if (!['1', '2'].includes(sanitizedTable)) {
+            alert('Debe seleccionar una mesa válida: 1 o 2.');
+            return;
+        }
+
         const itemsText = cart.map(function (item) {
             return '- ' + item.name + ' x' + item.quantity + ' - ' + formatCurrency(item.price * item.quantity);
         }).join('\n');
@@ -160,6 +254,7 @@
             'Hola Tonalli, quiero hacer este pedido:',
             '',
             'Cliente: ' + sanitizedName,
+            'Mesa: ' + sanitizedTable,
             itemsText,
             '',
             'Total: ' + formatCurrency(total),
