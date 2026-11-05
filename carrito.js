@@ -174,9 +174,6 @@
 
         if (isMobile) {
             window.location.href = appUrl;
-            setTimeout(function () {
-                window.location.href = webUrl;
-            }, 1200);
             return;
         }
 
