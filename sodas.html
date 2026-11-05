@@ -19,9 +19,15 @@
             <li><a href="tradicionales.html">Tradicionales</a></li>
             <li><a href="sodas.html">Sodas</a></li>
             <li><a href="snacks.html">Snacks</a></li>
-            
         </ul>
     </nav>
+    <div class="cart-actions">
+        <button type="button" class="checkout-btn">Enviar pedido</button>
+        <button type="button" class="cart-toggle" aria-label="Abrir carrito">
+            <span>🛒</span>
+            <span id="cart-count">0</span>
+        </button>
+    </div>
 </header>
 
 <main class="category-page">
@@ -34,25 +40,49 @@
     </section>
 
     <section class="category-list">
-        <article class="category-card">
+        <article class="category-card product-item" data-name="Tamarindo" data-price="3.99">
             <div class="menu-item">
                 <img src="imagenes/soda-tamarindo.png" alt="Papas Babys">
                 <div class="menu-text"><strong>Tamarindo</strong><span>Soda de tamarindo escharchado de chamoy y tajín</span><div class="price">$3.99</div></div>
             </div>
+            <div class="product-actions">
+                <button type="button" class="add-to-cart">Añadir al carrito</button>
+            </div>
         </article>
-        <article class="category-card">
+        <article class="category-card product-item" data-name="Sandia-fresa" data-price="3.99">
             <div class="menu-item">
                 <img src="imagenes/soda-sandia.png" alt="Nachos">
                 <div class="menu-text"><strong>Sandia-fresa</strong><span>Soda de sandia-fresa escharchado de chamoy y tajín</span><div class="price">$3.99</div></div>
             </div>
+            <div class="product-actions">
+                <button type="button" class="add-to-cart">Añadir al carrito</button>
+            </div>
         </article>
-        <article class="category-card">
+        <article class="category-card product-item" data-name="Mango-Maracuya" data-price="3.99">
             <div class="menu-item">
                 <img src="imagenes/soda-maracuya.png" alt="Elote asado">
                 <div class="menu-text"><strong>Mango-Maracuya</strong><span>Soda de mango-maracuya escharchado de chamoy y tajín</span><div class="price">$3.99</div></div>
             </div>
+            <div class="product-actions">
+                <button type="button" class="add-to-cart">Añadir al carrito</button>
+            </div>
         </article>
     </section>
 </main>
+
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-panel" id="cart-panel" aria-label="Carrito de compras">
+    <div class="cart-panel__header">
+        <h3>Mi pedido</h3>
+        <button type="button" class="cart-close" id="cart-close" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <ul id="cart-items"></ul>
+    <div class="cart-panel__footer">
+        <div class="cart-total">Total: <span id="cart-total">$0.00</span></div>
+        <button type="button" class="boton cart-submit checkout-btn">Enviar pedido</button>
+    </div>
+</aside>
+
+<script src="carrito.js"></script>
 </body>
 </html>

@@ -21,6 +21,13 @@
             <li><a href="snacks.html">Snacks</a></li>
         </ul>
     </nav>
+    <div class="cart-actions">
+        <button type="button" class="checkout-btn">Enviar pedido</button>
+        <button type="button" class="cart-toggle" aria-label="Abrir carrito">
+            <span>🛒</span>
+            <span id="cart-count">0</span>
+        </button>
+    </div>
 </header>
 
 <main class="category-page">
@@ -33,19 +40,40 @@
     </section>
 
     <section class="category-list">
-        <article class="category-card">
+        <article class="category-card product-item" data-name="Horchata" data-price="2.49">
             <div class="menu-item">
                 <img src="imagenes/Horchata.jpeg" alt="Horchata">
                 <div class="menu-text"><strong>Horchata</strong><span>Horchata con toques de canela</span><div class="price">$2.49</div></div>
-          
+            </div>
+            <div class="product-actions">
+                <button type="button" class="add-to-cart">Añadir al carrito</button>
+            </div>
         </article>
-        <article class="category-card">
+        <article class="category-card product-item" data-name="Spicy Jamaica" data-price="4.99">
             <div class="menu-item">
                 <img src="imagenes/Spicy Jamaica.jpeg" alt="Jamaica">
                 <div class="menu-text"><strong>Spicy Jamaica</strong><span>Jamaica, Limón, Picante</span><div class="price">$4.99</div></div>
             </div>
+            <div class="product-actions">
+                <button type="button" class="add-to-cart">Añadir al carrito</button>
+            </div>
         </article>
     </section>
 </main>
+
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-panel" id="cart-panel" aria-label="Carrito de compras">
+    <div class="cart-panel__header">
+        <h3>Mi pedido</h3>
+        <button type="button" class="cart-close" id="cart-close" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <ul id="cart-items"></ul>
+    <div class="cart-panel__footer">
+        <div class="cart-total">Total: <span id="cart-total">$0.00</span></div>
+        <button type="button" class="boton cart-submit checkout-btn">Enviar pedido</button>
+    </div>
+</aside>
+
+<script src="carrito.js"></script>
 </body>
 </html>
