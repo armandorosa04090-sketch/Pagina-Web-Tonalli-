@@ -285,43 +285,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const appUrl = 'instagram://user?username=tonalli_sv_';
         const webUrl = 'https://www.instagram.com/tonalli_sv_?mdxt=ZDNlZDc0MzIxNw==';
 
-        instagramLink.href = isMobile ? appUrl : webUrl;
-
-        instagramLink.addEventListener('click', (event) => {
-            if (!isMobile) return;
-
-            event.preventDefault();
-            const start = Date.now();
-            window.location.href = appUrl;
-
-            setTimeout(() => {
-                if (Date.now() - start < 1500) {
-                    window.location.href = webUrl;
-                }
-            }, 1200);
-        });
+        if (isMobile) {
+            instagramLink.href = appUrl;
+            instagramLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                window.location.href = appUrl;
+            });
+        } else {
+            instagramLink.href = webUrl;
+        }
     }
 
     const whatsappLink = document.querySelector('.whatsapp-float');
     if (whatsappLink) {
-        const waAppUrl = 'https://wa.me/50362135729?text=Hola%20Tonalli%2C%20quiero%20hacer%20mi%20pedido';
+        const waAppUrl = 'whatsapp://send?phone=50362135729&text=Hola%20Tonalli%2C%20quiero%20hacer%20mi%20pedido';
         const waWebUrl = 'https://api.whatsapp.com/send?phone=50362135729&text=Hola%20Tonalli%2C%20quiero%20hacer%20mi%20pedido';
 
-        whatsappLink.href = isMobile ? waAppUrl : waWebUrl;
-
-        whatsappLink.addEventListener('click', (event) => {
-            if (!isMobile) return;
-
-            event.preventDefault();
-            const start = Date.now();
-            window.location.href = waAppUrl;
-
-            setTimeout(() => {
-                if (Date.now() - start < 1500) {
-                    window.location.href = waWebUrl;
-                }
-            }, 1200);
-        });
+        if (isMobile) {
+            whatsappLink.href = waAppUrl;
+            whatsappLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                window.location.href = waAppUrl;
+            });
+        } else {
+            whatsappLink.href = waWebUrl;
+        }
     }
 });
 </script>
