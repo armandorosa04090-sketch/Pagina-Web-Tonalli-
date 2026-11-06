@@ -251,6 +251,18 @@ Frente al Hotel Karma Muse.
 
 </footer>
 
+<div class="social-float">
+    <a class="instagram-float" href="https://www.instagram.com/tonalli_sv_?mdxt=ZDNlZDc0MzIxNw==" aria-label="Instagram Tonalli">
+        <img src="imagenes/ig.png" alt="Instagram Tonalli" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <span class="instagram-fallback" aria-hidden="true">◎</span>
+    </a>
+
+    <a class="whatsapp-float" href="https://wa.me/50362135729?text=Hola%20Tonalli%2C%20quiero%20hacer%20mi%20pedido" aria-label="WhatsApp Tonalli">
+        <img src="imagenes/wa.png" alt="WhatsApp Tonalli" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <span class="whatsapp-fallback" aria-hidden="true">✆</span>
+    </a>
+</div>
+
 <div class="cart-overlay" id="cart-overlay"></div>
 <aside class="cart-panel" id="cart-panel" aria-label="Carrito de compras">
     <div class="cart-panel__header">
@@ -263,6 +275,56 @@ Frente al Hotel Karma Muse.
         <button type="button" class="boton cart-submit checkout-btn">Enviar pedido</button>
     </div>
 </aside>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const isMobile = /(Android|iPhone|iPad|iPod)/i.test(navigator.userAgent);
+
+    const instagramLink = document.querySelector('.instagram-float');
+    if (instagramLink) {
+        const appUrl = 'instagram://user?username=tonalli_sv_';
+        const webUrl = 'https://www.instagram.com/tonalli_sv_?mdxt=ZDNlZDc0MzIxNw==';
+
+        instagramLink.href = isMobile ? appUrl : webUrl;
+
+        instagramLink.addEventListener('click', (event) => {
+            if (!isMobile) return;
+
+            event.preventDefault();
+            const start = Date.now();
+            window.location.href = appUrl;
+
+            setTimeout(() => {
+                if (Date.now() - start < 1500) {
+                    window.location.href = webUrl;
+                }
+            }, 1200);
+        });
+    }
+
+    const whatsappLink = document.querySelector('.whatsapp-float');
+    if (whatsappLink) {
+        const waAppUrl = 'https://wa.me/50362135729?text=Hola%20Tonalli%2C%20quiero%20hacer%20mi%20pedido';
+        const waWebUrl = 'https://api.whatsapp.com/send?phone=50362135729&text=Hola%20Tonalli%2C%20quiero%20hacer%20mi%20pedido';
+
+        whatsappLink.href = isMobile ? waAppUrl : waWebUrl;
+
+        whatsappLink.addEventListener('click', (event) => {
+            if (!isMobile) return;
+
+            event.preventDefault();
+            const start = Date.now();
+            window.location.href = waAppUrl;
+
+            setTimeout(() => {
+                if (Date.now() - start < 1500) {
+                    window.location.href = waWebUrl;
+                }
+            }, 1200);
+        });
+    }
+});
+</script>
 
 </body>
 <script src="carrito.js"></script>
