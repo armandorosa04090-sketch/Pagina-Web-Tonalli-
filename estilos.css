@@ -1184,15 +1184,15 @@ footer {
     }
 
     .menu-item {
-        grid-template-columns: 72px 1fr !important;
+        grid-template-columns: 104px 1fr !important;
         gap: 0.75rem;
         padding: 0.9rem;
         align-items: center;
     }
 
     .menu-item img {
-        width: 72px !important;
-        height: 72px !important;
+        width: 104px !important;
+        height: 104px !important;
         object-fit: cover;
         border-radius: 12px;
     }
