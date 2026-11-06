@@ -2,10 +2,33 @@
     const STORAGE_KEY = 'tonalliCart';
     const PHONE_NUMBER = '50362135729';
 
+    function normalizeCartCategory(itemName, itemCategory) {
+        const categoryName = (itemCategory || '').toString().trim();
+        if (categoryName) {
+            return categoryName;
+        }
+
+        const lowerName = (itemName || '').toLowerCase();
+        const snackKeywords = ['papas', 'nachos', 'chunks', 'trio', 'hamburguesa', 'snack', 'acompañamiento'];
+
+        return snackKeywords.some(function (keyword) {
+            return lowerName.includes(keyword);
+        }) ? 'Acompañamientos' : 'Bebidas';
+    }
+
     function getCart() {
         try {
             const savedCart = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            return Array.isArray(savedCart) ? savedCart : [];
+            if (!Array.isArray(savedCart)) {
+                return [];
+            }
+
+            return savedCart.map(function (item) {
+                return {
+                    ...item,
+                    category: normalizeCartCategory(item.name, item.category)
+                };
+            });
         } catch (error) {
             return [];
         }
@@ -72,19 +95,44 @@
         updateCartBadge();
     }
 
-    function addItemToCart(name, price) {
+    function getProductCategory(productItem) {
+        if (!productItem) {
+            return 'Bebidas';
+        }
+
+        if (productItem.dataset && productItem.dataset.category) {
+            return productItem.dataset.category;
+        }
+
+        const section = productItem.closest('.menu-grupo') || productItem.closest('.category-list') || productItem.closest('.category-page');
+        const sectionTitle = section && section.querySelector('h3, h1')
+            ? section.querySelector('h3, h1').textContent.trim()
+            : '';
+
+        if (sectionTitle) {
+            return sectionTitle;
+        }
+
+        return 'Bebidas';
+    }
+
+    function addItemToCart(name, price, category) {
         const cart = getCart();
         const existingItem = cart.find(function (item) {
             return item.name.toLowerCase() === name.toLowerCase();
         });
 
+        const normalizedCategory = normalizeCartCategory(name, category);
+
         if (existingItem) {
             existingItem.quantity += 1;
+            existingItem.category = normalizedCategory;
         } else {
             cart.push({
                 name: name,
                 price: Number(price),
-                quantity: 1
+                quantity: 1,
+                category: normalizedCategory
             });
         }
 
@@ -242,9 +290,33 @@
             return;
         }
 
-        const itemsText = cart.map(function (item) {
-            return '- ' + item.name + ' x' + item.quantity + ' - ' + formatCurrency(item.price * item.quantity);
-        }).join('\n');
+        const groupedItems = {
+            Bebidas: [],
+            Acompañamientos: []
+        };
+
+        cart.forEach(function (item) {
+            const category = normalizeCartCategory(item.name, item.category);
+            const groupName = /papas|nachos|chunks|trio|hamburguesa|snack|acompañamiento/i.test(category)
+                || /papas|nachos|chunks|trio|hamburguesa/i.test(item.name)
+                ? 'Acompañamientos'
+                : 'Bebidas';
+
+            groupedItems[groupName].push(item);
+        });
+
+        const itemsText = Object.entries(groupedItems)
+            .filter(function ([, items]) {
+                return items.length;
+            })
+            .map(function ([groupName, items]) {
+                const lines = items.map(function (item) {
+                    return '- ' + item.name + ' x' + item.quantity + ' - ' + formatCurrency(item.price * item.quantity);
+                });
+
+                return groupName + ':\n' + lines.join('\n');
+            })
+            .join('\n\n');
 
         const total = cart.reduce(function (sum, item) {
             return sum + item.price * item.quantity;
@@ -255,6 +327,7 @@
             '',
             'Cliente: ' + sanitizedName,
             'Mesa: ' + sanitizedTable,
+            '',
             itemsText,
             '',
             'Total: ' + formatCurrency(total),
@@ -286,10 +359,11 @@
 
                 const name = productItem.dataset.name || productItem.querySelector('.menu-text strong')?.textContent.trim();
                 const price = Number(productItem.dataset.price || productItem.querySelector('.price')?.textContent.replace(/[$,]/g, '') || 0);
+                const category = getProductCategory(productItem);
 
                 if (!name || !price) return;
 
-                addItemToCart(name, price);
+                addItemToCart(name, price, category);
             });
         });
     }

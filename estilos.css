@@ -536,11 +536,18 @@ nav a:focus {
     pointer-events: none;
 }
 
+@media (min-width: 861px) {
+    .contenido {
+        width: min(100%, 460px);
+        padding: clamp(0.8rem, 1.5vw, 1.2rem);
+    }
+}
+
 .contenido {
     position: relative;
     z-index: 1;
-    width: min(100%, 620px);
-    padding: clamp(1rem, 2.5vw, 1.8rem);
+    width: min(100%, 540px);
+    padding: clamp(0.9rem, 2vw, 1.5rem);
     border-radius: 22px;
     background: rgba(12, 19, 29, 0.30);
     border: 1px solid rgba(255, 255, 255, 0.10);
@@ -1135,6 +1142,8 @@ footer {
         min-height: calc(92svh - 64px);
         padding: 2.2rem 0.75rem 1rem;
         align-items: flex-end;
+        background-position: top center;
+        background-size: cover;
     }
 
     .hero h1 {
@@ -1142,16 +1151,16 @@ footer {
         margin-bottom: 0.75rem;
     }
 
-    .hero {
-        min-height: calc(100vh - 120px);
-        padding: 2.2rem 0.75rem 1rem;
-        align-items: flex-end;
-        background-position: top center;
-        background-size: cover;
-    }
-        padding: 1rem 0.9rem;
-        border-radius: 22px;
-        margin-top: 1rem;
+    .contenido {
+        width: 100%;
+        max-width: none;
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        margin-top: 0;
     }
 
     .boton {
